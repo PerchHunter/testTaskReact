@@ -50,7 +50,7 @@ function Header() {
           />
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Меню
+            Menu
           </Typography>
           {auth && (
             <div>

@@ -98,7 +98,7 @@ function UsersTable() {
                         color="warning"
                         onClick={() => deleteUser(user.id)}
                       >
-                        Удалить
+                        Delete
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -107,7 +107,7 @@ function UsersTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {maxPagePagination && (
+      {maxPagePagination ? (
         <Stack spacing={2} sx={{ mt: 3 }}>
           <Pagination
             count={maxPagePagination}
@@ -117,7 +117,7 @@ function UsersTable() {
             sx={{ marginX: "auto" }}
           />
         </Stack>
-      )}
+      ) : null}
     </Box>
   );
 }
