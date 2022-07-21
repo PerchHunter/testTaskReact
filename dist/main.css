@@ -8,6 +8,13 @@
   margin: 0 auto;
 }
 
+/* .MuiTextField-root {
+  margin-bottom: 1em;
+  background-color: #ffffff;
+  border-radius: 5px;
+} */
+
 .errorMessage {
   color: #d32f2f;
 }
+

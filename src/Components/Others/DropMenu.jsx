@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./css/styles.css";
+
 import { Menu, MenuItem } from "@mui/material";
 
 export default function DropMenu({ point, anchorElem, handleClose }) {
