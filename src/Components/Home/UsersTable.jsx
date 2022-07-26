@@ -19,7 +19,7 @@ import {
 
 export default observer(UsersTable);
 
-function UsersTable() {
+function UsersTable({ convertDate, checkIndex }) {
   const [usersStore] = useStore("users");
 
   const {
@@ -35,22 +35,6 @@ function UsersTable() {
   const [curPage, setCurPage] = useState(page);
 
   const maxPagePagination = Math.ceil(itemsUsers.length / limit);
-
-  function convertDate(timestamp) {
-    const date = new Date(timestamp * 1000);
-    let month = date.getMonth() + 1;
-
-    if (month < 10) month = "0" + month;
-
-    return `${date.getDate()}:${month}:${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-  }
-
-  // проверяем, чтобы отображаемые строки были в границах смещения(offset) и (offset + limit)
-  function checkIndex(index) {
-    if (page === 1 && index < limit) return true;
-    else if (page > 1 && offset <= index && index < offset + limit) return true;
-    else return false;
-  }
 
   useEffect(() => {
     updatePage(curPage);
@@ -79,7 +63,7 @@ function UsersTable() {
           <TableBody>
             {itemsUsers.map(
               (user, index) =>
-                checkIndex(index) && (
+                checkIndex(index, page, limit, offset) && (
                   <TableRow
                     key={user.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

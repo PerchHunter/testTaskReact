@@ -1,3 +1,6 @@
+//cross-fetch требуется при тестировании
+import fetch from "cross-fetch";
+
 import { makeAutoObservable, runInAction } from "mobx";
 
 export default class Users {

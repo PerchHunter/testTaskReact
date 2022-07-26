@@ -18,7 +18,7 @@ import {
 
 export default observer(EventsTable);
 
-function EventsTable() {
+function EventsTable({ convertDate, checkIndex }) {
   const limit = 5;
   const [curPage, setCurPage] = useState(1);
   const [offset, setOffset] = useState(0);
@@ -27,22 +27,6 @@ function EventsTable() {
   const { eventsList } = eventsStore;
 
   const maxPagePagination = Math.ceil(eventsList.length / limit);
-
-  function convertDate(timestamp) {
-    const date = new Date(timestamp * 1000);
-    let month = date.getMonth() + 1;
-
-    if (month < 10) month = "0" + month;
-
-    return `${date.getDate()}:${month}:${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-  }
-
-  function checkIndex(index) {
-    if (curPage === 1 && index < limit) return true;
-    else if (curPage > 1 && offset <= index && index < offset + limit)
-      return true;
-    else return false;
-  }
 
   useEffect(() => {
     setCurPage(curPage);
@@ -69,7 +53,7 @@ function EventsTable() {
           <TableBody>
             {eventsList.map(
               (eventItem, index) =>
-                checkIndex(index) && (
+                checkIndex(index, curPage, limit, offset) && (
                   <TableRow
                     key={eventItem.event}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
